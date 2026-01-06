@@ -1,6 +1,12 @@
 // Sample content data - this will eventually come from your backend/CMS
 const contentData = [
     {
+        id: 23,
+        type: 'image',
+        src: 'assets/images/IMG_8559.jpg',
+        alt: 'IMG 8559'
+    },
+    {
         id: 1,
         type: 'image',
         src: 'assets/images/future_is_yours.jpg',
