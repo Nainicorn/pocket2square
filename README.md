@@ -18,8 +18,8 @@ This is a personal project created for daily motivation—for myself and my frie
 
 The images and videos used in this project were sourced from:
 - **Cosmos.so** - For aesthetic and motivational content
-- **TikTok** - For trending inspirational videos and clips
-- **Google Images** - For various motivational images
+- **TikTok** - For trending inspirational clips
+- **Google** - For various motivational images and clips
 
 All media has been curated for personal and non-commercial use.
 
@@ -29,14 +29,11 @@ All media has been curated for personal and non-commercial use.
 - CSS3
 - Vanilla JavaScript
 - GitHub Pages (deployment)
+- Claude Code
+*more features will be added later for fun*
 
 ## How to Use
 
-1. Visit the live site: [pocket2square](https://nainicorn.github.io/pocket2square/)
-2. Browse through the gallery
-3. Use filters to find specific content
-4. Click on items to view in full screen
+Visit the live site: (https://nainicorn.github.io/pocket2square/) & Browse through the gallery
 
 ---
-
-Made with ❤️ for motivation
