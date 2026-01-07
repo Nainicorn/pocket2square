@@ -6,7 +6,6 @@ A personal motivational gallery web app designed for daily inspiration. Browse t
 
 - 📸 Image gallery with smooth browsing
 - 🎥 Video playback support
-- 🏷️ Filter by categories (motivation, mindset, aesthetic, etc.)
 - 🎨 Clean, responsive design
 - ⚡ Fast and lightweight
 
@@ -30,7 +29,7 @@ All media has been curated for personal and non-commercial use.
 - Vanilla JavaScript
 - GitHub Pages (deployment)
 - Claude Code
-*more features will be added later for fun*
+- *more features will be added later for fun*
 
 ## How to Use
 
