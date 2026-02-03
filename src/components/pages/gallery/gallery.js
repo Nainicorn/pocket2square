@@ -57,47 +57,6 @@ export const GalleryPage = {
         }
       })
     })
-
-    // Shuffle button
-    const shuffleBtn = document.querySelector('.__gallery .shuffle-btn')
-    if (shuffleBtn) {
-      shuffleBtn.addEventListener('click', () => this._shuffle())
-    }
-  },
-
-  _shuffle() {
-    const appMain = document.getElementById('app-main')
-    const gallery = appMain.querySelector('.__gallery')
-
-    // Add shuffle animation
-    if (gallery) {
-      gallery.style.opacity = '0.5'
-      gallery.style.transform = 'scale(0.98)'
-    }
-
-    // Fisher-Yates shuffle
-    for (let i = this.items.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [this.items[i], this.items[j]] = [this.items[j], this.items[i]]
-    }
-
-    // Re-render after brief delay for animation
-    setTimeout(() => {
-      appMain.innerHTML = this.render()
-      this._bindEvents()
-
-      // Trigger re-layout animation
-      const newGallery = appMain.querySelector('.__gallery')
-      if (newGallery) {
-        newGallery.style.opacity = '0'
-        newGallery.style.transform = 'scale(0.98)'
-        // Force reflow
-        void newGallery.offsetHeight
-        newGallery.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
-        newGallery.style.opacity = '1'
-        newGallery.style.transform = 'scale(1)'
-      }
-    }, 100)
   },
 
   _cleanup() {
