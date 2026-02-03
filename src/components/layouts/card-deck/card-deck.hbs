@@ -1,0 +1,45 @@
+<div class="__card-deck">
+  <div class="deck-header">
+    <h2>Card Deck</h2>
+    <div class="deck-counter">{{#if currentItem}}{{math currentIndex '+' 1}} / {{totalItems}}{{/if}}</div>
+  </div>
+
+  {{#if items.length}}
+    <div class="deck-container">
+      <button class="deck-prev" {{#unless (gt currentIndex 0)}}disabled{{/unless}}>←</button>
+
+      <div class="deck-card-wrapper">
+        <div class="deck-card">
+          <div class="deck-card-content">
+            {{#if currentItem}}
+              {{#if (eq currentItem.type 'image')}}
+                <img src="{{currentItem.imageUrl}}" alt="{{currentItem.alt}}">
+              {{else}}
+                <video src="{{currentItem.imageUrl}}" muted loop playsinline></video>
+              {{/if}}
+            {{/if}}
+          </div>
+          <div class="deck-card-back">
+            {{#if currentItem}}
+              {{currentItem.description}}
+            {{/if}}
+          </div>
+        </div>
+      </div>
+
+      <button class="deck-next" {{#unless (lt currentIndex (math totalItems '-' 1))}}disabled{{/unless}}>→</button>
+    </div>
+
+    <div class="deck-controls">
+      <button class="deck-save-btn">💾 Save</button>
+    </div>
+
+    <div class="deck-hint">
+      <p>Click card to flip • Arrow keys or swipe to navigate</p>
+    </div>
+  {{else}}
+    <div class="empty-state">
+      <p>No items to display</p>
+    </div>
+  {{/if}}
+</div>

@@ -1,13 +1,16 @@
 import Handlebars from 'handlebars'
-import { getCollection, removeItemFromCollection } from '@api/storage.js'
+import { getCollection, removeItemFromCollection, updateCollection } from '@api/storage.js'
 import { publish, MSG } from '@framework/messages/messages.js'
 import { goTo } from '@framework/router/router.js'
 import { contentData } from '@data/content.js'
+import { CardDeckLayout } from '@layouts/card-deck/card-deck.js'
 import template from './collection.hbs?raw'
 import './collection.css'
 
 export const CollectionPage = {
   currentCollectionId: null,
+  currentLayout: 'gallery',
+  layoutComponent: null,
 
   render(params = {}) {
     this.currentCollectionId = params.id
@@ -17,11 +20,21 @@ export const CollectionPage = {
       return '<div class="__collection"><p>Collection not found</p></div>'
     }
 
+    // Get the layout from collection or default to gallery
+    this.currentLayout = collection.layout || 'gallery'
+
     // Map collection item IDs to actual item data
     const items = collection.items
       .map(itemId => contentData.find(item => item.id === itemId))
       .filter(item => item) // Remove undefined items
 
+    // Render based on layout
+    if (this.currentLayout === 'deck') {
+      this.layoutComponent = CardDeckLayout
+      return this.layoutComponent.render(items)
+    }
+
+    // Default gallery layout
     const compiled = Handlebars.compile(template)
     return compiled({
       collection,
@@ -32,6 +45,15 @@ export const CollectionPage = {
   },
 
   _bindEvents() {
+    // Handle different layouts
+    if (this.currentLayout === 'deck') {
+      if (this.layoutComponent) {
+        this.layoutComponent._bindEvents()
+      }
+      return
+    }
+
+    // Gallery layout events
     const collectionEl = document.querySelector('.__collection')
     if (!collectionEl) return
 
@@ -40,6 +62,15 @@ export const CollectionPage = {
     if (backBtn) {
       backBtn.addEventListener('click', () => goTo('gallery'))
     }
+
+    // Layout switcher
+    const layoutBtns = collectionEl.querySelectorAll('.layout-btn')
+    layoutBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const layout = btn.dataset.layout
+        this._switchLayout(layout)
+      })
+    })
 
     // Item click to view in modal
     const cards = collectionEl.querySelectorAll('.collection-card')
@@ -69,6 +100,18 @@ export const CollectionPage = {
         }
       })
     })
+  },
+
+  _switchLayout(newLayout) {
+    const collection = getCollection(this.currentCollectionId)
+    if (collection) {
+      updateCollection(this.currentCollectionId, { layout: newLayout })
+      // Re-render with new layout
+      const appMain = document.getElementById('app-main')
+      const html = this.render({ id: this.currentCollectionId })
+      appMain.innerHTML = html
+      this._bindEvents()
+    }
   },
 
   _cleanup() {

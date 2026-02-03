@@ -60,6 +60,36 @@
 
 .__collection .collection-controls {
   margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.__collection .layout-selector {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.__collection .layout-btn {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.__collection .layout-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.__collection .layout-btn.active {
+  background: var(--accent);
+  color: #000000;
+  border-color: var(--accent);
 }
 
 .__collection .style-selector {
