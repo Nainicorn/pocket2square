@@ -1,0 +1,14 @@
+<div class="__bulletin-board">
+  {{#each items}}
+    <div class="bulletin-pin" data-id="{{this.id}}" style="left: {{this.x}}%; top: {{this.y}}%; transform: rotate({{this.rotation}}deg)">
+      <div class="pin-head"></div>
+      <div class="pin-image-wrapper">
+        {{#if (eq this.type 'image')}}
+          <img src="{{this.imageUrl}}" alt="{{this.title}}" class="pin-image" loading="lazy">
+        {{else if (eq this.type 'video')}}
+          <video src="{{this.src}}" class="pin-image" muted loop playsinline></video>
+        {{/if}}
+      </div>
+    </div>
+  {{/each}}
+</div>

@@ -16,10 +16,10 @@
   {{#if items.length}}
     <div class="collection-controls">
       <div class="layout-selector">
-        <button class="layout-btn active" data-layout="gallery">Gallery</button>
-        <button class="layout-btn" data-layout="deck">Deck</button>
-        <button class="layout-btn" data-layout="bulletin">Bulletin</button>
-        <button class="layout-btn" data-layout="journal">Journal</button>
+        <button class="layout-btn {{#if (eq currentLayout 'gallery')}}active{{/if}}" data-layout="gallery">Gallery</button>
+        <button class="layout-btn {{#if (eq currentLayout 'deck')}}active{{/if}}" data-layout="deck">Deck</button>
+        <button class="layout-btn {{#if (eq currentLayout 'bulletin')}}active{{/if}}" data-layout="bulletin">Bulletin</button>
+        <button class="layout-btn {{#if (eq currentLayout 'journal')}}active{{/if}}" data-layout="journal">Journal</button>
       </div>
       <div class="style-selector">
         <button class="style-btn active" data-style="flat">Flat</button>

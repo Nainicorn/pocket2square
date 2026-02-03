@@ -1,0 +1,144 @@
+.__bulletin-board {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #c19a6b 0%, #a67c52 50%, #8b6f47 100%);
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Cork texture effect using CSS */
+.__bulletin-board::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' result='noise' seed='2'/%3E%3C/filter%3E%3Crect width='100' height='100' fill='%23c19a6b' filter='url(%23noise)' opacity='0.3'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+}
+
+.__bulletin-board::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(0,0,0,0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(0,0,0,0.03) 0%, transparent 50%);
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Individual pins */
+.bulletin-pin {
+  position: absolute;
+  width: 160px;
+  height: 200px;
+  cursor: grab;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+  transform-origin: center;
+  will-change: transform, left, top;
+}
+
+.bulletin-pin:hover {
+  z-index: 100;
+}
+
+.bulletin-pin.dragging {
+  cursor: grabbing;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+}
+
+/* Pin head (thumbtack) */
+.pin-head {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle at 35% 35%, #f4e4c1 0%, #d4af37 40%, #b8941e 70%, #8b7214 100%);
+  border-radius: 50%;
+  box-shadow:
+    inset -2px -2px 4px rgba(0, 0, 0, 0.3),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.4),
+    0 4px 8px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+
+.pin-head::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.6) 0%, transparent 70%);
+}
+
+/* Image wrapper */
+.pin-image-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  border: 8px solid white;
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.25),
+    0 1px 2px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pin-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .bulletin-pin {
+    width: 120px;
+    height: 150px;
+  }
+
+  .pin-image-wrapper {
+    border: 6px solid white;
+  }
+
+  .pin-head {
+    width: 16px;
+    height: 16px;
+    top: -10px;
+  }
+}
+
+/* Animation for smooth transitions */
+@keyframes pinAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.bulletin-pin {
+  animation: pinAppear 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.bulletin-pin:nth-child(1) { animation-delay: 0ms; }
+.bulletin-pin:nth-child(2) { animation-delay: 40ms; }
+.bulletin-pin:nth-child(3) { animation-delay: 80ms; }
+.bulletin-pin:nth-child(4) { animation-delay: 120ms; }
+.bulletin-pin:nth-child(5) { animation-delay: 160ms; }
+.bulletin-pin:nth-child(n+6) { animation-delay: 200ms; }

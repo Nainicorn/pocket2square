@@ -4,6 +4,7 @@ import { publish, MSG } from '@framework/messages/messages.js'
 import { goTo } from '@framework/router/router.js'
 import { contentData } from '@data/content.js'
 import { CardDeckLayout } from '@layouts/card-deck/card-deck.js'
+import { BulletinBoardLayout } from '@layouts/bulletin-board/bulletin-board.js'
 import template from './collection.hbs?raw'
 import './collection.css'
 
@@ -34,22 +35,46 @@ export const CollectionPage = {
       return this.layoutComponent.render(items)
     }
 
+    if (this.currentLayout === 'bulletin') {
+      this.layoutComponent = BulletinBoardLayout
+      return this.layoutComponent.render(items)
+    }
+
     // Default gallery layout
     const compiled = Handlebars.compile(template)
     return compiled({
       collection,
       items,
       itemCount: items.length,
-      createdDate: new Date(collection.createdAt).toLocaleDateString()
+      createdDate: new Date(collection.createdAt).toLocaleDateString(),
+      currentLayout: this.currentLayout
     })
   },
 
   _bindEvents() {
     // Handle different layouts
-    if (this.currentLayout === 'deck') {
+    if (this.currentLayout === 'deck' || this.currentLayout === 'bulletin') {
       if (this.layoutComponent) {
         this.layoutComponent._bindEvents()
       }
+
+      // Add click handlers for pins/cards to open in modal
+      const items = this.currentLayout === 'bulletin'
+        ? document.querySelectorAll('.bulletin-pin')
+        : document.querySelectorAll('.deck-card')
+
+      items.forEach(item => {
+        item.addEventListener('click', (e) => {
+          // Only trigger if not dragging
+          if (e.currentTarget.classList.contains('dragging')) return
+
+          const itemId = item.dataset.id
+          const contentItem = contentData.find(i => i.id === itemId)
+          if (contentItem) {
+            publish(MSG.MODAL_OPEN, contentItem)
+          }
+        })
+      })
       return
     }
 
@@ -115,6 +140,9 @@ export const CollectionPage = {
   },
 
   _cleanup() {
+    if (this.layoutComponent && this.layoutComponent._cleanup) {
+      this.layoutComponent._cleanup()
+    }
     this.currentCollectionId = null
   }
 }
