@@ -1,0 +1,18 @@
+{
+  "name": "pocket2square",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Personal motivation content curation platform",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.7"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}

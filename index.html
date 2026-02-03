@@ -3,34 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>pocket2square</title>
+    <title>pocket2square - Pitstop for Motivation</title>
+    <meta name="description" content="Personal motivation content curation platform">
+    <meta name="theme-color" content="#0A0E13">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body data-theme="dark">
+    <!-- Persistent Header -->
     <header class="header">
         <div class="header-content">
+            <button class="hamburger-btn" id="hamburgerBtn">☰</button>
             <div class="logo"></div>
             <h1 class="tagline">pitstop for motivation</h1>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <span class="icon-sun">☀️</span>
+                <span class="icon-moon">🌙</span>
+            </button>
         </div>
     </header>
 
-    <main class="main-content">
-        <div class="gallery" id="gallery">
-            <!-- Gallery items will be dynamically inserted here -->
-        </div>
+    <!-- Page Container (swapped by router) -->
+    <main id="app-main" class="app-main">
+        <!-- Pages render here -->
     </main>
 
-    <!-- Modal for enlarged view -->
-    <div class="modal" id="modal">
-        <button class="modal-close" id="modalClose">&times;</button>
-        <div class="modal-content">
-            <div class="modal-media" id="modalMedia"></div>
-        </div>
-    </div>
+    <!-- Hamburger Menu (persistent, toggled visibility) -->
+    <nav id="hamburgerMenu" class="hamburger-menu">
+        <!-- Menu content -->
+    </nav>
 
-    <script src="script.js"></script>
+    <script type="module" src="/src/main.js"></script>
 </body>
 </html>
