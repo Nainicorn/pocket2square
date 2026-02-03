@@ -1,0 +1,47 @@
+<div class="__collection">
+  <div class="collection-header">
+    <button class="back-btn" aria-label="Back to gallery">← Back</button>
+    <div class="collection-info">
+      <h1>{{collection.name}}</h1>
+      {{#if collection.description}}
+        <p class="description">{{collection.description}}</p>
+      {{/if}}
+      <div class="collection-meta">
+        <span class="item-count">{{itemCount}} items</span>
+        <span class="created-date">Created {{createdDate}}</span>
+      </div>
+    </div>
+  </div>
+
+  {{#if items.length}}
+    <div class="collection-controls">
+      <div class="style-selector">
+        <button class="style-btn active" data-style="flat">Flat</button>
+        <button class="style-btn" data-style="polaroid">Polaroid</button>
+        <button class="style-btn" data-style="card">Card</button>
+      </div>
+    </div>
+
+    <div class="collection-grid">
+      {{#each items}}
+        <div class="collection-card" data-item-id="{{this.id}}">
+          <div class="card-image">
+            {{#if (eq this.type 'image')}}
+              <img src="{{this.imageUrl}}" alt="{{this.title}}" loading="lazy">
+            {{else}}
+              <video controls>
+                <source src="{{this.imageUrl}}" type="video/mp4">
+              </video>
+            {{/if}}
+          </div>
+          <button class="delete-item-btn" data-item-id="{{this.id}}" aria-label="Delete item">✕</button>
+        </div>
+      {{/each}}
+    </div>
+  {{else}}
+    <div class="empty-state">
+      <p>No items in this collection yet</p>
+      <p class="hint">Go back to the gallery and save some items!</p>
+    </div>
+  {{/if}}
+</div>

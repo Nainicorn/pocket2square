@@ -1,7 +1,7 @@
 import menuTemplate from './menu.hbs?raw'
 import './menu.css'
 import { goTo } from '@framework/router/router.js'
-import { getCollections } from '@api/storage.js'
+import { getCollections, createCollection } from '@api/storage.js'
 import { subscribe, publish, MSG } from '@framework/messages/messages.js'
 import Handlebars from 'handlebars'
 
@@ -56,8 +56,11 @@ function bindMenuEvents() {
   const createBtn = document.querySelector('.__menu .create-collection-btn')
   if (createBtn) {
     createBtn.addEventListener('click', () => {
-      publish(MSG.MODAL_OPEN, { type: 'create-collection' })
-      closeMenu()
+      const name = prompt('Collection name:')
+      if (name && name.trim()) {
+        createCollection({ name: name.trim() })
+        renderMenu() // Refresh menu to show new collection
+      }
     })
   }
 

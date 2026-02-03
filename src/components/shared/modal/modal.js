@@ -62,11 +62,15 @@ function close() {
 }
 
 function save(item) {
-  // Save logic
-  publish(MSG.ITEM_SAVED, item)
   // Heartbeat animation
   const saveBtn = document.querySelector('#modal .save-btn')
   if (saveBtn) {
     saveBtn.classList.add('saved')
   }
+
+  // Trigger save to collection modal
+  const event = new CustomEvent('save-to-collection', {
+    detail: { itemId: item.id }
+  })
+  document.dispatchEvent(event)
 }

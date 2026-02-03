@@ -1,0 +1,215 @@
+/* Collection Detail Page */
+.__collection {
+  padding: 3rem 1.5rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.__collection .collection-header {
+  margin-bottom: 3rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.__collection .back-btn {
+  padding: 0.65rem 1.2rem;
+  background: transparent;
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+.__collection .back-btn:hover {
+  background: var(--accent);
+  color: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.__collection .collection-info {
+  flex: 1;
+}
+
+.__collection .collection-info h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.__collection .description {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.__collection .collection-meta {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.__collection .collection-controls {
+  margin-bottom: 2rem;
+}
+
+.__collection .style-selector {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.__collection .style-btn {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.__collection .style-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.__collection .style-btn.active {
+  background: var(--accent);
+  color: #000000;
+  border-color: var(--accent);
+}
+
+.__collection .collection-grid {
+  column-count: 4;
+  column-gap: 1rem;
+}
+
+.__collection .collection-card {
+  cursor: pointer;
+  break-inside: avoid;
+  margin-bottom: 1rem;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--bg-secondary);
+  box-shadow: 0 2px 12px var(--shadow);
+  group: hover;
+}
+
+.__collection .collection-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 24px var(--shadow-strong);
+}
+
+.__collection .card-image {
+  width: 100%;
+  overflow: hidden;
+  background: var(--bg-secondary);
+}
+
+.__collection .card-image img,
+.__collection .card-image video {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.__collection .collection-card:hover .card-image img,
+.__collection .collection-card:hover .card-image video {
+  transform: scale(1.05);
+}
+
+.__collection .delete-item-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 107, 107, 0.9);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+}
+
+.__collection .collection-card:hover .delete-item-btn {
+  opacity: 1;
+}
+
+.__collection .delete-item-btn:hover {
+  background: #FF6B6B;
+  transform: scale(1.1);
+}
+
+.__collection .empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.__collection .empty-state p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.__collection .empty-state .hint {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .__collection .collection-grid {
+    column-count: 3;
+  }
+}
+
+@media (max-width: 768px) {
+  .__collection {
+    padding: 1.5rem 0.5rem;
+  }
+
+  .__collection .collection-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .__collection .collection-info h1 {
+    font-size: 1.5rem;
+  }
+
+  .__collection .collection-grid {
+    column-count: 2;
+  }
+
+  .__collection .collection-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .__collection .collection-grid {
+    column-count: 1;
+  }
+}

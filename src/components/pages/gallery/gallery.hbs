@@ -5,11 +5,14 @@
 
   <div class="gallery-grid">
     {{#each items}}
-      <div class="gallery-card" data-id="{{this.id}}">
+      <div class="gallery-card {{#if @first}}daily-card{{/if}}" data-id="{{this.id}}">
         {{#if (eq this.type 'image')}}
           <img src="{{this.imageUrl}}" alt="{{this.alt}}" loading="lazy">
         {{else if (eq this.type 'video')}}
           <video src="{{this.src}}" muted loop playsinline></video>
+        {{/if}}
+        {{#if @first}}
+          <div class="daily-badge">Today's Card</div>
         {{/if}}
       </div>
     {{/each}}
