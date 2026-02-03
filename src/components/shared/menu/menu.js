@@ -41,6 +41,12 @@ function renderMenu() {
 }
 
 function bindMenuEvents() {
+  // Close button
+  const closeBtn = document.querySelector('.__menu .menu-close')
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeMenu)
+  }
+
   // Collection links
   const collectionLinks = document.querySelectorAll('.__menu .collection-link')
   collectionLinks.forEach(link => {
