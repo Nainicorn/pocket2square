@@ -47,9 +47,9 @@ body {
 .header-content {
   max-width: 1400px;
   margin: 0 auto;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: space-between;
   gap: 1.5rem;
 }
 
@@ -75,7 +75,7 @@ body {
   letter-spacing: 0.3px;
   font-family: 'Cormorant', serif;
   font-style: italic;
-  flex: 1;
+  text-align: center;
 }
 
 .hamburger-btn {
@@ -89,6 +89,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  justify-self: end;
 }
 
 .hamburger-btn:hover {
