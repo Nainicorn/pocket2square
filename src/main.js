@@ -1,6 +1,7 @@
 import '@css/main.css'
 import '@css/animations.css'
 
+import { registerHelpers } from '@framework/handlebars/helpers.js'
 import { registerPage, initRouter } from '@framework/router/router.js'
 import { initModal } from '@components/shared/modal/modal.js'
 import { initMenu } from '@components/shared/menu/menu.js'
@@ -9,6 +10,9 @@ import { initSaveCollectionModal } from '@components/shared/save-collection-moda
 // Import page objects
 import { GalleryPage } from '@components/pages/gallery/gallery.js'
 import { CollectionPage } from '@components/pages/collection/collection.js'
+
+// Register Handlebars helpers FIRST
+registerHelpers()
 
 // Register pages
 registerPage('gallery', GalleryPage)
